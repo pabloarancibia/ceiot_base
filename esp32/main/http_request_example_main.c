@@ -23,7 +23,7 @@
 #include "lwip/netdb.h"
 #include "lwip/dns.h"
 #include "dht.h"
-#include "/home/iot/esp/ceiot_base/config/config.h"   // esto es mejorable...
+#include "/media/documentoslinux/iot/iiot/pablo_ceiot_base/esp32/config.h"   // esto es mejorable...
 
 /* Constants that aren't configurable in menuconfig */
 #define WEB_SERVER API_IP
@@ -31,7 +31,7 @@
 #define WEB_PATH "/measurement"
 
 static const dht_sensor_type_t sensor_type = DHT_TYPE_DHT11;
-static const gpio_num_t dht_gpio = 17;
+static const gpio_num_t dht_gpio = 22;
 
 
 static const char *TAG = "temp_collector";
