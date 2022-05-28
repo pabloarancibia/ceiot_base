@@ -41,13 +41,16 @@ const PORT = 8080;
 
 app.post('/measurement', function (req, res) {
 -       console.log("device id: " + req.body.id + " key: " + req.body.key + " temperature: " + req.body.t + " humidity: " + req.body.h);	
+    let timeNow = Date();
+    console.log(timeNow);
+    
     const {insertedId} = insertMeasurement({id:req.body.id, t:req.body.t, h:req.body.h});
 	res.send("received measurement into " +  insertedId);
 });
 
 app.post('/device', function (req, res) {
 	console.log("device id: " + req.body.id + " name: " + req.body.n + " key: " + req.body.k );
-
+    
     db.public.none("INSERT INTO devices VALUES ('"+req.body.id+ "', '"+req.body.n+"', '"+req.body.k+"')");
 	res.send("received new device");
 });
