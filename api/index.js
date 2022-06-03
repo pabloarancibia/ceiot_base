@@ -134,6 +134,10 @@ app.get('/device', function(req,res) {
     res.send( db.public.many("SELECT * FROM devices") );
 });
 
+app.get('/mqttsub', function(req,res) {
+    res.send( db.public.many("SELECT * FROM mqtt") );
+});
+
 startDatabase().then(async() => {
     await insertMeasurement({id:'1', t:'18', h:'78'});
     await insertMeasurement({id:'1', t:'19', h:'77'});
@@ -146,6 +150,12 @@ startDatabase().then(async() => {
     db.public.none("INSERT INTO devices VALUES ('31', 'ESP32s2', '345678')");
     db.public.none("INSERT INTO devices VALUES ('61', 'ESP8266', '456789')");
     console.log("sql device database up");
+
+    // mqtt
+    db.public.none("CREATE TABLE mqtt (device_id VARCHAR, topic VARCHAR, payload VARCHAR)");
+    db.public.none("INSERT INTO mqtt VALUES ('esp32_001', 'esp/test', 'Tarjeta Test')");
+    console.log("sql mqtt database up");
+
 
     app.listen(PORT, () => {
         console.log(`Listening at ${PORT}`);
@@ -179,5 +189,6 @@ client.on('connect', () => {
 })
 
 client.on('message', (topic, payload) => {
+    db.public.none("INSERT INTO mqtt VALUES ('"+topic+ "', '"+topic+"', '"+payload.toString()+"')");
     console.log('Received Message:', topic, payload.toString())
   })
