@@ -151,3 +151,33 @@ startDatabase().then(async() => {
         console.log(`Listening at ${PORT}`);
     });
 });
+
+// MQTT
+const mqtt = require('mqtt')
+const host = '192.168.2.120'
+const port = '1883'
+const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
+
+// mqtt connect function
+const connectUrl = `mqtt://${host}:${port}`
+const client = mqtt.connect(connectUrl, {
+  clientId,
+  clean: true,
+  connectTimeout: 4000,
+  username: 'admin',
+  password: '4dm1n/t3st',
+  reconnectPeriod: 1000,
+})
+
+// Subscribe to topics
+const topic = 'esp/test'
+client.on('connect', () => {
+  console.log('Connected')
+  client.subscribe([topic], () => {
+    console.log(`API CEIOT Subscribe to topic '${topic}'`)
+  })
+})
+
+client.on('message', (topic, payload) => {
+    console.log('Received Message:', topic, payload.toString())
+  })
