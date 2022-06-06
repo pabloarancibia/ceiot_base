@@ -228,3 +228,35 @@ Este entorno no me funcionó y además rompió el de ESP-IDF
 
 [Ejemplo de ESP8266 con lectura de DHT11](https://seguridad-agile.blogspot.com/2022/03/ejemplo-de-esp8266-con-lectura-de-dht11.html)
 
+
+## Agregado Pablo Arancibia
+  
+MQTT Broker Mosquitto con Docker Compose  
+  
+[MQTT Broker](https://github.com/pabloarancibia/arproyect)
+  
+  
+ESP32 + RFID RC522 + Buzzer  
+  
+[MQTT Broker](https://github.com/pabloarancibia/esp32rc522)
+  
+  
+#### Pasos:
+levantar docker-compose con broker mqtt  
+$ docker-compose up
+  
+En una shell:  
+mosquitto_sub -h localhost -t "esp/test"  
+  
+En otra shell:  
+mosquitto_pub -h localhost -t esp/test -m 23  
+  
+levantar API Ceiot  
+$ npm run dev  
+  
+encender esp32 rc522  
+  
+encender esp32 dht11  
+  
+Pasar tarjeta RFID en lector RC522  
+Testear en: shell con mosquitto_sub, API Ceiot console, endpoint localhost:8080/mqttsub  
