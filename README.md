@@ -229,7 +229,15 @@ Este entorno no me funcionó y además rompió el de ESP-IDF
 [Ejemplo de ESP8266 con lectura de DHT11](https://seguridad-agile.blogspot.com/2022/03/ejemplo-de-esp8266-con-lectura-de-dht11.html)
 
 
-## Agregado Pablo Arancibia
+# Agregado Pablo Arancibia  
+  
+Se trabaja con 3 repositorios. Uno de este curso, otro con un mqtt broker en docker compose y otro con una esp32 con un lector RFID y un buzzer sonoro.  
+Se optó por utilizar estos dispositivos en nuevos repositorios para poder reutilizarlos en el trabajo práctico final de la especialización.  
+  
+Se debe levantar el entorno con mosquitto mqtt broker, hacer el upload o flash en la esp32 con el Rfid. Previamente se deben cambiar las direcciones IP y las configuraciones de la conexión Wifi de red local.  
+Una vez realizados estos cambios y encendido los dispositivos, al pasar una tarjeta magnetica por el lector Rfid, este enviará un mensaje por mqtt al broker, y la api del proyecto del curso recibirá el mensaje mqtt y lo guardará en la base de datos. Luego se pueden visualizar los mensajes en el endpoint correspondiente.  
+  
+Detalles:  
   
 MQTT Broker Mosquitto con Docker Compose  
   
